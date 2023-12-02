@@ -1,0 +1,2 @@
+﻿ThreadManager.StartThreads();
+new Messager();
