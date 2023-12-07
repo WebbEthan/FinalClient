@@ -17,9 +17,13 @@ public class Messager : Client
         // Joins a match
         JoinMatch();
     }
+    protected override void OnDisconnect()
+    {
+        ConsoleApp.Start();
+    }
     protected override void OnMatchJoin()
     {
-        Console.WriteLine("Write a message or type /quit to disconnect and quit.");
+        Console.WriteLine("Write a message or type /quit to disconnect.");
         while (true)
         {
             string msg = Console.ReadLine();
@@ -27,8 +31,7 @@ public class Messager : Client
             {
                 if (msg == "/quit")
                 {
-                    // closes program
-                    ThreadManager.StopThreads();
+                    Disconnect();
                     return;
                 }
                 // sends msg

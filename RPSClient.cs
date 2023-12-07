@@ -22,6 +22,10 @@ public class RPSClient : Client
     {
         Console.WriteLine("Waiting for other player");
     }
+    protected override void OnDisconnect()
+    {
+        ConsoleApp.Start();
+    }
     private void _startGame(Packet packet, ProtocolType protocolType)
     {
         Console.WriteLine("Select One");

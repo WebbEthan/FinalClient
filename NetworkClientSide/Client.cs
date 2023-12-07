@@ -41,6 +41,8 @@ public class Client
     protected virtual void OnAuthentication() {}
     // Called when you join a match
     protected virtual void OnMatchJoin() {}
+    // Called when you disconnect from the server
+    protected virtual void OnDisconnect() {}
     // Tells the server to put you in a match, "0" for random match
     public void JoinMatch(string code = "0")
     {
@@ -77,6 +79,7 @@ public class Client
         _tcpProtocal = null;
         _udpProtocal = null;
         Console.WriteLine("Disconnected");
+        OnDisconnect();
     }
     #endregion
     private void _connectionCallback(int partialClientID)
@@ -103,18 +106,18 @@ public class Client
         }
         private void _handleData(IAsyncResult result)
         {
-            if (!_socket.Connected)
-            {
-                _reference.Disconnect();
-                return;
-            }
-            int recieveLength = _socket.EndReceive(result);
-            if (recieveLength > _buffer.Length)
-            {
-                _reference.Disconnect();
-            }
             if (_active)
             {
+                if (!_socket.Connected)
+                {
+                    _reference.Disconnect();
+                    return;
+                }
+                int recieveLength = _socket.EndReceive(result);
+                if (recieveLength > _buffer.Length)
+                {
+                    _reference.Disconnect();
+                }
                 if (recieveLength > 0)
                 {
                     byte[] data = new byte[recieveLength];
@@ -228,6 +231,10 @@ public class Client
         }
         private void _handleData(IAsyncResult result)
         {
+            if (_socket.Client == null)
+            {
+                return;
+            }
             byte[] data = _socket.EndReceive(result, ref _endpoint);
             try
             {
