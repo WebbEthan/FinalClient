@@ -14,6 +14,8 @@ public class RPSClient : Client
     }
     protected override void OnAuthentication()
     {
+        Console.WriteLine("What is your name?");
+        Username = Console.ReadLine();
         JoinMatch();
     }
     protected override void OnMatchJoin()
@@ -41,13 +43,10 @@ public class RPSClient : Client
         switch(packet.ReadByte())
         {
             case 0:
-                Console.WriteLine("draw");
+                Console.WriteLine("Draw");
                 break;
             case 1:
-                Console.WriteLine();
-                break;
-            case 2:
-                Console.WriteLine();
+                Console.WriteLine(packet.ReadString() + " Was The Winner!");
                 break;
         }
     }

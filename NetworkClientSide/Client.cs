@@ -10,6 +10,7 @@ public class Client
     // The store of methods defined by the client
     public Dictionary<int, _packetScripts> Handles;
     #region PublicMethods
+    public string Username = "";
     public bool IsHost = false;
     public string CurrenctMatchCode;
     public void Connect(string ip, int port)
@@ -46,6 +47,7 @@ public class Client
         using (Packet packet = new Packet(255))
         {
             packet.Write(code);
+            packet.Write(Username);
             SendData(packet, ProtocolType.Tcp);
         }
     }
@@ -55,6 +57,7 @@ public class Client
         using (Packet packet = new Packet(255))
         {
             packet.Write("-1");
+            packet.Write(Username);
             SendData(packet, ProtocolType.Tcp);
         }
     }
@@ -102,7 +105,7 @@ public class Client
         {
             if (!_socket.Connected)
             {
-                Disconnect();
+                _reference.Disconnect();
                 return;
             }
             int recieveLength = _socket.EndReceive(result);
