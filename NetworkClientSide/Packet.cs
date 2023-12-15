@@ -3,7 +3,7 @@ public class Packet : IDisposable
 {
     // A number to differenciate packet types
     public byte PacketType;
-    public List<byte> data;
+    public List<byte> Data;
     private byte[] _readingData;
     private int _readerPos = 0;
     #region  Constructors
