@@ -23,7 +23,7 @@ public class Client
     {
         if (protocolType == ProtocolType.Tcp && _tcpProtocal != null)
         {
-            packet.Insert(0, BitConverter.GetBytes(packet.data.Count));
+            packet.Insert(0, BitConverter.GetBytes(packet.Data.Count));
             packet.PrepForSending();
             _tcpProtocal.SendData(packet);
         }
@@ -199,7 +199,7 @@ public class Client
         }
         public void SendData(Packet packet)
         {
-            _socket.BeginSend(packet.data.ToArray(), 0, packet.data.Count, SocketFlags.None, new AsyncCallback(_endSend), null);
+            _socket.BeginSend(packet.Data.ToArray(), 0, packet.Data.Count, SocketFlags.None, new AsyncCallback(_endSend), null);
         }
         private void _endSend(IAsyncResult result) { _socket.EndSend(result); }
         public void Disconnect()
@@ -251,7 +251,7 @@ public class Client
         }
         public void SendData(Packet packet)
         {
-            _socket.BeginSend(packet.data.ToArray(), packet.data.Count, null, null);
+            _socket.BeginSend(packet.Data.ToArray(), packet.Data.Count, null, null);
         }
         public void Disconnect()
         {

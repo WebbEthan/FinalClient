@@ -12,52 +12,52 @@ public class Packet : IDisposable
         PacketType = _data[0];
         List<byte> Readable = new List<byte>();
         Readable.AddRange(_data);
-        data = Readable.GetRange(1, _data.Length - 1);
-        _readingData = data.ToArray();
+        Data = Readable.GetRange(1, _data.Length - 1);
+        _readingData = Data.ToArray();
     }
     public Packet(byte type)
     {
-        data = new List<byte>();
+        Data = new List<byte>();
         PacketType = type;
     }
     #endregion
     public byte[] UnreadData()
     {
-        return data.GetRange(_readerPos, data.Count - _readerPos).ToArray();
+        return Data.GetRange(_readerPos, Data.Count - _readerPos).ToArray();
     }
     #region WriteingMethods
     public void Write(byte _data)
     {
-        data.Add(_data);
+        Data.Add(_data);
     }
     public void Write(byte[] _data)
     {
-        data.AddRange(_data);
+        Data.AddRange(_data);
     }
     public void Write(int value)
     {
-        data.AddRange(BitConverter.GetBytes(value));
+        Data.AddRange(BitConverter.GetBytes(value));
     }
     public void Write(float value)
     {
-        data.AddRange(BitConverter.GetBytes(value));
+        Data.AddRange(BitConverter.GetBytes(value));
     }
     public void Write(string value)
     {
         byte[] _data = Encoding.ASCII.GetBytes(value);
         Write(_data.Length);
-        data.AddRange(_data);
+        Data.AddRange(_data);
     }
     public void Write(bool value)
     {
-        data.AddRange(BitConverter.GetBytes(value));
+        Data.AddRange(BitConverter.GetBytes(value));
     }
     #endregion
     #region ReadMethods
     public byte ReadByte()
     {
         _readerPos += 1;
-        return data[_readerPos - 1];
+        return Data[_readerPos - 1];
     }
     public int ReadInt()
     {
@@ -67,7 +67,7 @@ public class Packet : IDisposable
     public string ReadString()
     {
         int length = ReadInt();
-        byte[] value = data.GetRange(_readerPos, length).ToArray();
+        byte[] value = Data.GetRange(_readerPos, length).ToArray();
         _readerPos += length;
         return Encoding.ASCII.GetString(value);
     }
@@ -79,11 +79,11 @@ public class Packet : IDisposable
     #endregion
     public void Insert(int index, byte[] _data)
     {
-        data.InsertRange(index, _data);
+        Data.InsertRange(index, _data);
     }
     public void PrepForSending()
     {
-        data.Insert(0, PacketType);
+        Data.Insert(0, PacketType);
     }
     public void Dispose()
     {
