@@ -150,7 +150,7 @@ public class Client
                                                 _reference.AddClient(packet.ReadString());
                                             }
                                             Console.WriteLine($"Joined Match {_reference.CurrenctMatchCode}");
-                                            _reference.OnMatchJoin();
+                                            ThreadManager.ExecuteOnApplicationThread = new List<Action>() {() => {_reference.OnMatchJoin();}};
                                         }
                                         else if (packet.PacketType == 254)
                                         {
@@ -161,7 +161,7 @@ public class Client
                                         {
                                             // Authentication callback
                                             Console.WriteLine("Succesfully Authenticated");
-                                            _reference.OnAuthentication();
+                                            ThreadManager.ExecuteOnApplicationThread = new List<Action>() {() => {_reference.OnAuthentication();}};
                                         }
                                         else if (packet.PacketType == 252)
                                         {

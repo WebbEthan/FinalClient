@@ -5,6 +5,7 @@ public static class ThreadManager
     {
         ProgramActive = true;
         _mainThreadReference.Start();
+        _applicationReference.Start();
         Console.WriteLine($"Main Thread Started");
     }
     public static void StopThreads()
@@ -26,6 +27,24 @@ public static class ThreadManager
                 {
                     _toExecuteOnMainThread[0].Invoke();
                     _toExecuteOnMainThread.RemoveAt(0);
+                }
+            }
+            Thread.Sleep(10);
+        }
+    }
+    private static Thread _applicationReference = new Thread(new ThreadStart(_applicationThread));
+    private static List<Action> _toExecuteOnApplicationThread = new List<Action>();
+    public static List<Action> ExecuteOnApplicationThread { set { lock(_toExecuteOnApplicationThread) {_toExecuteOnApplicationThread.AddRange(value);} } }
+    private static void _applicationThread()
+    {
+        while (ProgramActive)
+        {
+            lock(_toExecuteOnApplicationThread)
+            {
+                while (_toExecuteOnApplicationThread.Count > 0)
+                {
+                    _toExecuteOnApplicationThread[0].Invoke();
+                    _toExecuteOnApplicationThread.RemoveAt(0);
                 }
             }
             Thread.Sleep(10);

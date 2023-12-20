@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ethan\\Desktop\\CSE Homework\\CSE210\\FinalClient\\FinalClient.csproj": {}
+    "C:\\Users\\ethan\\Desktop\\CSE Homework\\CSE210\\finalClient\\FinalClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ethan\\Desktop\\CSE Homework\\CSE210\\FinalClient\\FinalClient.csproj": {
+    "C:\\Users\\ethan\\Desktop\\CSE Homework\\CSE210\\finalClient\\FinalClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ethan\\Desktop\\CSE Homework\\CSE210\\FinalClient\\FinalClient.csproj",
+        "projectUniqueName": "C:\\Users\\ethan\\Desktop\\CSE Homework\\CSE210\\finalClient\\FinalClient.csproj",
         "projectName": "FinalClient",
-        "projectPath": "C:\\Users\\ethan\\Desktop\\CSE Homework\\CSE210\\FinalClient\\FinalClient.csproj",
+        "projectPath": "C:\\Users\\ethan\\Desktop\\CSE Homework\\CSE210\\finalClient\\FinalClient.csproj",
         "packagesPath": "C:\\Users\\ethan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ethan\\Desktop\\CSE Homework\\CSE210\\FinalClient\\obj\\",
+        "outputPath": "C:\\Users\\ethan\\Desktop\\CSE Homework\\CSE210\\finalClient\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

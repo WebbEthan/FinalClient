@@ -12,19 +12,25 @@ public class Messager : Client
         // connect to server
         Connect("127.0.0.1", 25578);
     }
+    private bool _active = true;
     protected override void OnAuthentication()
     {
         // Joins a match
         JoinMatch();
     }
+    protected override void AddClient(string clientID)
+    {
+        Console.WriteLine($"{clientID} joined the chat");
+    }
     protected override void OnDisconnect()
     {
+        _active = false;
         ConsoleApp.Start();
     }
     protected override void OnMatchJoin()
     {
         Console.WriteLine("Write a message or type /quit to disconnect.");
-        while (true)
+        while (_active)
         {
             string msg = Console.ReadLine();
             if (!string.IsNullOrEmpty(msg))
