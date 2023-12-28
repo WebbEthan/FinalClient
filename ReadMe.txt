@@ -11,6 +11,7 @@ Methods
         - RemoveClient(string clientID) Called when another client leaves the match you are in.
         - OnAuthentication() Called when the client successfully authenticates on the server.
         - OnMatchJoin() Called when the client joins a match.
+        - OnMatchKicked() Called when you are kicked from a match.
         - OnDisconnect() Called when the client disconnects from the server.
     Runnable
         - JoinMatch(string code) Call this to join a match pass the match code for a specific match

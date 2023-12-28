@@ -22,6 +22,11 @@ public class Messager : Client
     {
         Console.WriteLine($"{clientID} joined the chat");
     }
+    protected override void OnMatchKicked()
+    {
+        // Joins a new Match
+        JoinMatch();
+    }
     protected override void OnDisconnect()
     {
         _active = false;

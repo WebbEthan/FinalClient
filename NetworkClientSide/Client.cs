@@ -41,6 +41,8 @@ public class Client
     protected virtual void OnAuthentication() {}
     // Called when you join a match
     protected virtual void OnMatchJoin() {}
+    // Called when you are kicked from a match
+    protected virtual void OnMatchKicked() {}
     // Called when you disconnect from the server
     protected virtual void OnDisconnect() {}
     // Tells the server to put you in a match, "0" for random match
@@ -167,6 +169,12 @@ public class Client
                                         {
                                             // Client left your match
                                             _reference.RemoveClient(packet.ReadString());
+                                        }
+                                        else if (packet.PacketType == 251)
+                                        {
+                                            // Kicked from the current match
+                                            Console.WriteLine("You were kicked from the match reason : " + packet.ReadString());
+                                            _reference.OnMatchKicked();
                                         }
                                         else
                                         {
